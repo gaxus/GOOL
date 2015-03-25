@@ -14,6 +14,7 @@ import java.util.Collection;
 import gool.test.FileManager;
 import logger.Log;
 
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -251,5 +252,22 @@ public class GoolTestTranslationFromJavaToCpp {
 		}
 		return files;
 	}
+	
+	@AfterClass
+	public static void clean(){
+		String foldername = Settings.get("cpp_out_dir");
+		File folder = new File(foldername);
+		Collection<File> cpp_files = getFilesInFolder(folder, "cpp");
+		Collection<File> h_files = getFilesInFolder(folder, "h");
+		
+		for(File f : cpp_files){
+			f.delete();
+		}
+		
+		for(File f : h_files){
+			f.delete();
+		}
+	}
+	
 
 }

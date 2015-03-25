@@ -13,6 +13,7 @@ import java.util.Collection;
 
 import logger.Log;
 
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -244,5 +245,16 @@ public class GoolTestTranslationFromJavaToPython {
 			}
 		}
 		return files;
+	}
+	
+	@AfterClass
+	public static void clean(){
+		String foldername = Settings.get("python_out_dir");
+		File folder = new File(foldername);
+		Collection<File> py_files = getFilesInFolder(folder, "py");
+		
+		for(File f : py_files){
+			f.delete();
+		}
 	}
 }
